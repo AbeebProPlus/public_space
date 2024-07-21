@@ -5,7 +5,7 @@ defmodule Forum.Posts.Post do
   schema "posts" do
     field :title, :string
     field :body, :string
-
+    belongs_to :user, Forum.Accounts.User
     timestamps(type: :utc_datetime)
   end
 
