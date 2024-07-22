@@ -7,7 +7,6 @@ defmodule Forum.Accounts do
   alias Forum.Repo
 
   alias Forum.Accounts.User
-
   @doc """
   Returns the list of users.
 
@@ -18,7 +17,7 @@ defmodule Forum.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+       Repo.all(from u in User, preload: [:posts])
   end
 
   @doc """
@@ -35,7 +34,7 @@ defmodule Forum.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload(:posts)
 
   @doc """
   Creates a user.
